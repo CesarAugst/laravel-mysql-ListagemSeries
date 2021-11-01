@@ -23,11 +23,14 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(SeriesFormRequest $request)
+    //public function store(SeriesFormRequest $request)
+    public function store(Request $request)
     {
-        $request->validate();
-
-        $serie = Serie::create($request->all());
+        //$request->validate();
+        $nome = $request->nome;
+        $serie = Serie::create([
+            'nome' => $nome
+        ]);
         $request->session()
             ->flash(
                 'mensagem',
