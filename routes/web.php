@@ -51,3 +51,19 @@ Route::get('/visualizando-email', function(){
         10
     );
 });
+Route::get('/enviando-email', function(){
+    $email = new \App\Mail\NovaSerie(
+        'Arrow',
+        5,
+        10
+    );
+
+    $email->subject = 'Nova Série Adicionada';
+
+    $user = (object)[
+      'email' => 'cesarsilvasb@gmail.com',
+      'name' => 'Cesar'
+    ];
+    \Illuminate\Support\Facades\Mail::to($user)->send($email);
+    return 'Email enviado';
+});
