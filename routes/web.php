@@ -43,3 +43,7 @@ Route::get('/sair', function(){
    \Illuminate\Support\Facades\Auth::logout();
    return redirect('/entrar');
 });
+
+Route::get('/visualizando-email', function(){
+    return new \App\Mail\NovaSerie();
+});
