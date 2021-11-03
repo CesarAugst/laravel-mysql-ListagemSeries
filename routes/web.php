@@ -23,3 +23,7 @@ Route::get('/series/{serieId}/temporadas', 'TemporadasController@index');
 Route::get('/temporadas/{temporada}/episodios', 'EpisodiosController@index');
 Route::post('/temporada/{temporada}/episodios/assistir', 'EpisodiosController@assistir');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
