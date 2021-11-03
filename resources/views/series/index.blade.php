@@ -7,9 +7,9 @@
 @section('conteudo')
 
     @include('mensagem', ['mensagem' => $mensagem])
-
-    <a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar</a>
-
+    @auth
+        <a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar</a>
+    @endauth
     <ul class="list-group">
         @foreach($series as $serie)
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -26,12 +26,15 @@
                 </div>
 
                 <span class="d-flex">
-        <button class="btn btn-info btn-sm mr-1" onclick="toggleInput({{ $serie->id }})">
-            Editar
-        </button>
+        @auth
+            <button class="btn btn-info btn-sm mr-1" onclick="toggleInput({{ $serie->id }})">
+                Editar
+            </button>
+        @endauth
         <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm mr-1">
             Visualizar
         </a>
+        @auth
         <form method="post" action="/series/{{ $serie->id }}"
               onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome) }}?')">
             @csrf
@@ -40,6 +43,7 @@
                 Deletar
             </button>
         </form>
+        @endauth
     </span>
             </li>
         @endforeach
@@ -60,7 +64,7 @@
 
         }
 
-        function editarSerie(serieId){
+        function editarSerie(serieId) {
             let formData = new FormData();
             const nome = document
                 .querySelector(`#input-nome-serie-${serieId} > input`)
@@ -72,14 +76,13 @@
 
             const url = `/series/${serieId}/editaNome`;
 
-            fetch(url,{
+            fetch(url, {
                 body: formData,
                 method: 'POST'
             }).then(() => {
                 toggleInput(serieId);
                 document.getElementById(`nome-serie-${serieId}`).textContent = nome;
             })
-
 
 
         }
