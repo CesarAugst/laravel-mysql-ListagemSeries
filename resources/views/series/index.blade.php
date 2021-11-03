@@ -5,11 +5,8 @@
 @endsection
 
 @section('conteudo')
-    @if(!empty($mensagem))
-        <div class="alert alert-success">
-            {{$mensagem}}
-        </div>
-    @endif
+    
+    @include('mensagem', ['mensagem' => $mensagem])
 
     <a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar</a>
 
@@ -35,7 +32,7 @@
         <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm mr-1">
             Visualizar
         </a>
-        <form method="post" action="/series/remover/{{ $serie->id }}"
+        <form method="post" action="/series/{{ $serie->id }}"
               onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome) }}?')">
             @csrf
             @method('DELETE')
