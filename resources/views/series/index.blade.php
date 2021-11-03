@@ -5,7 +5,7 @@
 @endsection
 
 @section('conteudo')
-    
+
     @include('mensagem', ['mensagem' => $mensagem])
 
     <a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar</a>
