@@ -10,6 +10,10 @@
     <title>Controle de Séries</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
+    <a href="{{ route('listar_series') }}" class="navbar-brand">Home</a>
+    <a href="/sair" class="text-danger">Sair</a>
+</nav>
 <div class="container">
     <div class="p-5 mb-4 bg-light rounded-3">
         <div class="container-fluid py-5">
