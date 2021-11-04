@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Episodio;
 use App\Events\SerieApagada;
+use App\Jobs\ExcluirCapaSerie;
 use App\Serie;
 use App\Temporada;
 use Illuminate\Support\Facades\DB;
@@ -16,13 +17,15 @@ class RemovedorDeSerie
         $nomeSerie = '';
         DB::transaction(function () use ($serieId, &$nomeSerie){
             $serie = Serie::find($serieId);
+            $serieObj = (object) $serie->toArray();
             $nomeSerie = $serie->nome;
+
             $this->removerTemporadas($serie);
             $serie->delete();
 
             $evento = new SerieApagada($serie);
             event($evento);
-
+            ExcluirCapaSerie::dispatch($serieObj);
         });
 
 
