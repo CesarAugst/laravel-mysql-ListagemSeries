@@ -22,6 +22,13 @@
                 <label for="nome">Ep. por temporadas</label>
                 <input type="number" class="form-control" name="ep_por_temporada" id="ep_por_temporada">
             </div>
+
+            <div class="row">
+                <div class="col col-12">
+                    <label for="capa">Capa</label>
+                    <input type="text" class="form-control" name="capa" id="capa">
+                </div>
+            </div>
         </div>
 
         <button class="btn btn-primary mt-2">Adicionar</button>
